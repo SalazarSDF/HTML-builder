@@ -1,12 +1,13 @@
 const fs = require("fs");
-//const path = require("path");
+const path = require("path");
+const textPath = path.join(__dirname, "text.txt");
 const rl = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
   terminal: true,
 });
 
-let stream = fs.createWriteStream("text.txt");
+let stream = fs.createWriteStream(textPath);
 
 console.log("\x1b[1m", "\x1b[46m", "\x1b[31m", "ВЫСКАЖИСЬ НЕ ДЕРЖИ В СЕБЕ!");
 
