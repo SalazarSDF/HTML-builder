@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const path = require("node:path");
-const dirPath = path.join(__dirname, "secret-folder/");
+const dirPath = path.join(__dirname, "secret-folder");
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return "0 Bytes";
@@ -15,7 +15,8 @@ fs.readdir(dirPath, { withFileTypes: true }).then(function (data) {
   data.forEach((file) => {
     if (file.isFile()) {
       let [name, type] = file.name.split(".");
-      fs.stat(dirPath + file.name).then(function (data) {
+      const filePath = path.resolve(dirPath, file.name);
+      fs.stat(filePath).then(function (data) {
         console.log(
           "\x1b[1m",
           `${name} - ${type ? type : "no type"} - ${formatBytes(data.size)}`
